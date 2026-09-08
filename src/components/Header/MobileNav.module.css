@@ -1,0 +1,78 @@
+.nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: var(--mobile-nav-h);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-top: 1px solid var(--glass-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  z-index: var(--z-nav);
+  padding: 0 var(--space-4);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+@media (min-width: 769px) {
+  .nav { display: none; }
+}
+
+.navItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-lg);
+  color: var(--text-muted);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  background: none;
+  border: none;
+  transition: color var(--transition-fast);
+  min-width: 60px;
+  min-height: 48px;
+  justify-content: center;
+}
+
+.navItem:hover { color: var(--text-secondary); }
+
+/* Cart item — prominent */
+.cartNavItem {
+  color: var(--text-secondary);
+  position: relative;
+}
+
+.cartNavItem.hasItems {
+  color: var(--red);
+}
+
+.cartIcon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.badge {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  width: 16px;
+  height: 16px;
+  background: var(--red);
+  color: #0C0A09;
+  border-radius: 50%;
+  font-size: 9px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: scaleIn 0.2s var(--transition-spring);
+}

@@ -1,0 +1,11 @@
+.logo {
+  display: inline-flex;
+  align-items: center;
+  color: var(--red);
+  transition: color var(--transition-base);
+  cursor: pointer;
+}
+
+.logo svg {
+  font-family: var(--font-brand);
+}
