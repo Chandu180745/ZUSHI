@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { VegIcon, ItemBadges } from '../UI/VegIcon.jsx';
 import { useCart } from '../../context/CartContext.jsx';
+import { getAssetUrl } from '../../utils/assets.js';
 import styles from './FoodDetailModal.module.css';
 
 const FALLBACK = '/images/food-sushi.jpg';
@@ -23,19 +24,13 @@ export function FoodDetailModal({ item, onClose }) {
     }
   }, [item]);
 
-  // Focus trap
+  // Trap focus & escape key
   useEffect(() => {
-    const prev = document.activeElement;
-    firstFocusRef.current?.focus();
-
-    const trap = (e) => {
+    const handleKeyDown = (e) => {
       if (e.key === 'Escape') onClose();
     };
-    document.addEventListener('keydown', trap);
-    return () => {
-      document.removeEventListener('keydown', trap);
-      prev?.focus();
-    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, [onClose]);
 
   // Lock scroll
@@ -46,33 +41,33 @@ export function FoodDetailModal({ item, onClose }) {
 
   if (!item) return null;
 
-  const basePrice = selectedVariant ? selectedVariant.price : item.basePrice;
-  const addOnTotal = selectedAddOns.reduce((s, a) => s + a.price, 0);
-  const itemTotal = (basePrice + addOnTotal) * quantity;
+  // Calculate dynamic price
+  const variantPrice = selectedVariant ? selectedVariant.price : (item.basePrice || 0);
+  const addOnsPrice = selectedAddOns.reduce((sum, addOn) => sum + addOn.price, 0);
+  const unitPrice = variantPrice + addOnsPrice;
+  const totalPrice = unitPrice * quantity;
 
-  const toggleAddOn = (addOn) => {
-    setSelectedAddOns(prev =>
-      prev.find(a => a.id === addOn.id)
-        ? prev.filter(a => a.id !== addOn.id)
-        : [...prev, addOn]
-    );
+  const handleAddOnToggle = (addOn) => {
+    setSelectedAddOns(prev => {
+      const exists = prev.some(a => a.id === addOn.id);
+      if (exists) {
+        return prev.filter(a => a.id !== addOn.id);
+      } else {
+        return [...prev, addOn];
+      }
+    });
   };
 
   const handleAddToCart = () => {
-    addItem({
-      id: item.id,
-      name: item.name,
-      basePrice: item.basePrice,
-      image: item.image,
-      type: item.type,
-      selectedVariant,
-      selectedAddOns,
+    addItem(item, {
+      variant: selectedVariant,
+      addOns: selectedAddOns,
       quantity,
     });
     setAdded(true);
     setTimeout(() => {
       onClose();
-    }, 700);
+    }, 400);
   };
 
   const canAdd = item.available && (!item.variants?.length || selectedVariant);
@@ -80,18 +75,21 @@ export function FoodDetailModal({ item, onClose }) {
   return (
     <div
       className={styles.backdrop}
-      onClick={e => { if (e.target === e.currentTarget) onClose(); }}
+      onClick={onClose}
       role="dialog"
       aria-modal="true"
-      aria-label={`${item.name} details`}
+      aria-labelledby="modal-title"
     >
-      <div className={`${styles.modal} animate-slide-up`}>
+      <div
+        className={styles.modal}
+        onClick={e => e.stopPropagation()}
+      >
         {/* Close button */}
         <button
-          ref={closeRef}
           className={styles.closeBtn}
           onClick={onClose}
-          aria-label="Close"
+          ref={closeRef}
+          aria-label="Close details"
         >
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
             <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
@@ -101,7 +99,7 @@ export function FoodDetailModal({ item, onClose }) {
         {/* Image */}
         <div className={styles.imageWrap}>
           <img
-            src={imgError ? FALLBACK : item.image}
+            src={getAssetUrl(imgError ? FALLBACK : item.image)}
             alt={item.name}
             className={styles.image}
             onError={() => setImgError(true)}

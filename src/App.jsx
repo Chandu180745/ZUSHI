@@ -1,5 +1,5 @@
-import { useState, useCallback } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import React, { useState, useCallback } from 'react';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from './context/ThemeContext.jsx';
 import { CartProvider, useCart } from './context/CartContext.jsx';
 
@@ -19,6 +19,71 @@ import { OrderConfirmation } from './components/OrderConfirmation/OrderConfirmat
 
 import { Admin } from './pages/Admin/Admin.jsx';
 import { RESTAURANT_CONFIG } from './config/restaurant.js';
+
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false, error: null };
+  }
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true, error };
+  }
+
+  componentDidCatch(error, errorInfo) {
+    console.error("ZUSHI App Error:", error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div style={{
+          minHeight: '100vh',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          background: '#0a0a0a',
+          color: '#fff',
+          fontFamily: "'Shojumaru', cursive, system-ui",
+          padding: '24px',
+          textAlign: 'center'
+        }}>
+          <h1 style={{ color: '#c8102e', fontSize: '28px', marginBottom: '16px' }}>ZUSHI</h1>
+          <p style={{ color: '#d4af37', fontSize: '18px', marginBottom: '20px' }}>Something went wrong while loading the menu.</p>
+          <pre style={{ 
+            background: '#181818', 
+            padding: '16px', 
+            borderRadius: '8px', 
+            maxWidth: '600px', 
+            overflowX: 'auto',
+            fontSize: '12px',
+            color: '#aaa',
+            fontFamily: 'monospace'
+          }}>
+            {this.state.error?.toString()}
+          </pre>
+          <button 
+            onClick={() => window.location.reload()}
+            style={{
+              marginTop: '24px',
+              padding: '12px 28px',
+              background: '#c8102e',
+              color: '#fff',
+              border: 'none',
+              borderRadius: '9999px',
+              fontSize: '16px',
+              cursor: 'pointer'
+            }}
+          >
+            Reload Page
+          </button>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
 
 function Storefront() {
   const { addItem } = useCart();
@@ -122,16 +187,19 @@ function Storefront() {
 
 function App() {
   return (
-    <ThemeProvider>
-      <CartProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Storefront />} />
-            <Route path="/admin" element={<Admin />} />
-          </Routes>
-        </BrowserRouter>
-      </CartProvider>
-    </ThemeProvider>
+    <ErrorBoundary>
+      <ThemeProvider>
+        <CartProvider>
+          <HashRouter>
+            <Routes>
+              <Route path="/" element={<Storefront />} />
+              <Route path="/admin" element={<Admin />} />
+              <Route path="*" element={<Storefront />} />
+            </Routes>
+          </HashRouter>
+        </CartProvider>
+      </ThemeProvider>
+    </ErrorBoundary>
   );
 }
 

@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import RESTAURANT_CONFIG from '../../config/restaurant.js';
+import { getAssetUrl } from '../../utils/assets.js';
 import styles from './Hero.module.css';
 
 export function Hero({ onExploreMenu, onOrderNow, onReserve }) {
@@ -22,7 +23,7 @@ export function Hero({ onExploreMenu, onOrderNow, onReserve }) {
       {/* Background image with parallax */}
       <div className={styles.bg} aria-hidden="true">
         <img
-          src="/images/hero-food.jpg"
+          src={getAssetUrl('/images/hero-food.jpg')}
           alt=""
           className={styles.bgImg}
           fetchpriority="high"

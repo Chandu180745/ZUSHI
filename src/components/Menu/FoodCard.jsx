@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { VegIcon, ItemBadges } from '../UI/VegIcon.jsx';
+import { getAssetUrl } from '../../utils/assets.js';
 import styles from './FoodCard.module.css';
 
 const FALLBACK = '/images/food-sushi.jpg';
@@ -34,7 +35,7 @@ export function FoodCard({ item, onViewDetail, onQuickAdd }) {
       {/* Image */}
       <div className={styles.imageWrap}>
         <img
-          src={imgError ? FALLBACK : item.image}
+          src={getAssetUrl(imgError ? FALLBACK : item.image)}
           alt={item.name}
           className={styles.image}
           loading="lazy"

@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useCart } from '../../context/CartContext.jsx';
 import { VegIcon } from '../UI/VegIcon.jsx';
+import { getAssetUrl } from '../../utils/assets.js';
 import styles from './CartDrawer.module.css';
 
 const FALLBACK = '/images/food-sushi.jpg';
@@ -136,7 +137,7 @@ function CartItem({ item, onRemove, onUpdateQty }) {
     <div className={styles.item}>
       <div className={styles.itemImage}>
         <img
-          src={imgError ? FALLBACK : item.image}
+          src={getAssetUrl(imgError ? FALLBACK : item.image)}
           alt={item.name}
           onError={() => setImgError(true)}
         />
