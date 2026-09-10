@@ -59,9 +59,10 @@ export function FoodDetailModal({ item, onClose }) {
   };
 
   const handleAddToCart = () => {
-    addItem(item, {
-      variant: selectedVariant,
-      addOns: selectedAddOns,
+    addItem({
+      ...item,
+      selectedVariant,
+      selectedAddOns,
       quantity,
     });
     setAdded(true);
@@ -155,7 +156,7 @@ export function FoodDetailModal({ item, onClose }) {
                     <button
                       key={addOn.id}
                       className={`${styles.addOnBtn} ${isSelected ? styles.addOnSelected : ''} ${!addOn.available ? styles.addOnUnavailable : ''}`}
-                      onClick={() => addOn.available && toggleAddOn(addOn)}
+                      onClick={() => addOn.available && handleAddOnToggle(addOn)}
                       disabled={!addOn.available}
                       aria-pressed={!!isSelected}
                       aria-label={`${addOn.name} +₹${addOn.price}`}
@@ -195,12 +196,12 @@ export function FoodDetailModal({ item, onClose }) {
               className={`btn btn-primary ${styles.addToCartBtn} ${added ? styles.addedState : ''}`}
               onClick={handleAddToCart}
               disabled={!canAdd || added}
-              aria-label={added ? 'Added to cart' : `Add to cart — ₹${itemTotal}`}
+              aria-label={added ? 'Added to cart' : `Add to cart — ₹${totalPrice}`}
             >
               {added ? (
                 <>✓ Added!</>
               ) : (
-                <>Add to Cart · ₹{itemTotal}</>
+                <>Add to Cart · ₹{totalPrice}</>
               )}
             </button>
           </div>

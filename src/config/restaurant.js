@@ -8,7 +8,7 @@
 const DEFAULT_CONFIG = {
   // ── Basic Info ──────────────────────────────────────────────────────────────
   name: 'Zushi',
-  tagline: 'A premium dining experience in Sainikpuri',
+  tagline: 'Authentic Japanese Eats',
   canonicalUrl: 'https://zushisainikpuri.in',
 
   // ── Address ─────────────────────────────────────────────────────────────────
@@ -22,8 +22,8 @@ const DEFAULT_CONFIG = {
   },
 
   // ── Phone Numbers ────────────────────────────────────────────────────────────
-  publicPhone: '8074152355',
-  whatsappOrderNumber: '+918074152355',
+  publicPhone: '82476 37445',
+  whatsappOrderNumber: '+918247637445',
 
   // ── Google Business ──────────────────────────────────────────────────────────
   google: {
@@ -45,7 +45,7 @@ const DEFAULT_CONFIG = {
   outdoorSeating: true,
 
   // ── Reservation ──────────────────────────────────────────────────────────────
-  reservationUrl: null,
+  reservationUrl: 'https://www.google.com/maps/reserve/v/dine/c/ZYSijruR8uc?source=pa&opi=89978449&hl=en-IN&gei=Xx-gapaLNaefhvcP9N6lsAY&rr=3&sourceurl=https://www.google.com/search?client%3Dsafari%26rls%3Den%26q%3Dzushi%26ie%3DUTF-8%26oe%3DUTF-8',
 
   // ── Opening Hours ────────────────────────────────────────────────────────────
   openingHours: {
@@ -74,6 +74,14 @@ const DEFAULT_CONFIG = {
     instagram: null,
     facebook: null,
     twitter: null,
+  },
+
+  // ── Ordering / Review Platforms ──────────────────────────────────────────────
+  platforms: {
+    zomato: 'https://www.zomato.com/hyderabad/zushi-sainikpuri-secunderabad',
+    swiggy: 'https://www.swiggy.com/restaurants/hyderabad/sainikpuri/zushi-1339325/dineout',
+    district: 'https://www.district.in/dining/hyderabad/zushi-sainikpuri-secunderabad?srsltid=AfmBOopuxRdRV9GS6UbnYcqHt2kHvx0I09AqeIAj96UdTPLoSNkXZKBw',
+    magicpin: 'https://magicpin.in/Hyderabad/Vayupuri/Restaurant/Zushi/store/17b92b2?srsltid=AfmBOoqC_EEhjuiiwVEmahUdjWi0tGTy8qbntu5Ydvy6pjgBCnFgRLE4',
   },
   
   // Notice Banner (optional alert at the top of the site)

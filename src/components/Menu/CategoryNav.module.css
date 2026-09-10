@@ -1,6 +1,6 @@
 .nav {
   position: sticky;
-  top: 60px;
+  top: var(--header-height);
   z-index: var(--z-sticky);
   background: var(--glass-bg);
   backdrop-filter: var(--glass-blur);
@@ -9,23 +9,15 @@
   padding: 0 var(--content-pad);
 }
 
-@media (min-width: 769px) {
-  .nav { top: 68px; }
-}
-
 .track {
   display: flex;
-  gap: var(--space-1);
-  overflow-x: auto;
-  scrollbar-width: none;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2);
   padding: var(--space-3) 0;
-  -webkit-overflow-scrolling: touch;
-  scroll-snap-type: x proximity;
   max-width: var(--max-width);
   margin: 0 auto;
 }
-
-.track::-webkit-scrollbar { display: none; }
 
 .tab {
   display: flex;
@@ -42,7 +34,6 @@
   cursor: pointer;
   transition: all var(--transition-fast);
   white-space: nowrap;
-  scroll-snap-align: center;
   min-height: 36px;
   flex-shrink: 0;
 }

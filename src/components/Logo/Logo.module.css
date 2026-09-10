@@ -1,11 +1,43 @@
 .logo {
   display: inline-flex;
   align-items: center;
-  color: var(--red);
-  transition: color var(--transition-base);
+  justify-content: center;
+  line-height: 1;
+  text-decoration: none;
   cursor: pointer;
+  height: var(--logo-height, var(--logo-h-md, clamp(26px, 1.6vw + 20px, 42px)));
+  aspect-ratio: var(--logo-aspect-ratio, 374 / 119);
+  max-height: 100%;
+  flex-shrink: 0;
+  transition: transform var(--transition-fast);
 }
 
-.logo svg {
-  font-family: var(--font-brand);
+.sm {
+  --logo-height: var(--logo-h-sm, clamp(20px, 1.2vw + 16px, 28px));
 }
+
+.md {
+  --logo-height: var(--logo-h-md, clamp(26px, 1.6vw + 20px, 42px));
+}
+
+.lg {
+  --logo-height: var(--logo-h-lg, clamp(34px, 2.5vw + 25px, 56px));
+}
+
+.logoImg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform var(--transition-fast), filter var(--transition-fast);
+  filter: brightness(0) saturate(100%) invert(12%) sepia(95%) saturate(6000%) hue-rotate(348deg) brightness(95%) contrast(100%) drop-shadow(0 2px 8px rgba(200, 16, 46, 0.28));
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.logo:hover .logoImg {
+  transform: scale(1.03);
+  filter: brightness(0) saturate(100%) invert(12%) sepia(95%) saturate(6000%) hue-rotate(348deg) brightness(95%) contrast(100%) drop-shadow(0 4px 14px rgba(200, 16, 46, 0.52));
+}
+
+

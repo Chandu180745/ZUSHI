@@ -104,55 +104,28 @@
   --max-width:   1280px;
   --content-pad: clamp(1rem, 4vw, 2rem);
 
+  /* Dynamic Header & Brand Scaling Tokens */
+  --header-height:     clamp(56px, 3.5vw + 42px, 72px);
+  --logo-h-sm:         clamp(20px, 1.2vw + 16px, 28px);
+  --logo-h-md:         clamp(26px, 1.6vw + 20px, 42px);
+  --logo-h-lg:         clamp(34px, 2.5vw + 25px, 56px);
+  --logo-aspect-ratio: 374 / 119;
+
   /* Mobile nav height */
-  --mobile-nav-h: 64px;
+  --mobile-nav-h: clamp(56px, 6vw + 36px, 64px);
 
   /* Z-index scale */
   --z-base:    0;
   --z-above:   10;
   --z-sticky:  100;
+  --z-item-modal: 120;
+  --z-nav:     150;
   --z-drawer:  200;
   --z-modal:   300;
   --z-toast:   400;
-  --z-nav:     500;
 }
 
-/* ── Light Theme ────────────────────────────────────────────── */
-[data-theme="light"] {
-  --bg-base:       #FFFFFF;
-  --bg-surface:    #F9F9F9;
-  --bg-elevated:   #F0F0F0;
-  --bg-card:       #FFFFFF;
-  --bg-overlay:    rgba(255, 255, 255, 0.95);
 
-  --text-primary:  #000000;
-  --text-secondary:#333333;
-  --text-muted:    #666666;
-  --text-inverse:  #FFFFFF;
-
-  --red:           #C8102E;
-  --red-light:     #E01838;
-  --red-dark:      #8A0B20;
-  --red-subtle:    rgba(200, 16, 46, 0.1);
-
-  --gold:          #B8892A;
-  --gold-light:    #D4AF37;
-  --gold-dark:     #8A6418;
-  --gold-subtle:   rgba(184, 137, 42, 0.1);
-
-  --border:        rgba(184, 137, 42, 0.2);
-  --border-subtle: rgba(26, 21, 16, 0.08);
-  --border-strong: rgba(184, 137, 42, 0.4);
-
-  --shadow-sm:     0 1px 3px rgba(0,0,0,0.08);
-  --shadow-md:     0 4px 16px rgba(0,0,0,0.12);
-  --shadow-lg:     0 8px 32px rgba(0,0,0,0.16);
-  --shadow-xl:     0 20px 60px rgba(0,0,0,0.2);
-  --shadow-gold:   0 0 20px rgba(184, 137, 42, 0.15);
-
-  --glass-bg:      rgba(250, 247, 242, 0.8);
-  --glass-border:  rgba(184, 137, 42, 0.2);
-}
 
 /* ── Reset & Base ───────────────────────────────────────────── */
 *, *::before, *::after {
@@ -166,8 +139,8 @@ html {
   -webkit-text-size-adjust: 100%;
   overflow-x: hidden;
 }
-
 body {
+  margin: 0;
   font-family: var(--font-body);
   font-size: var(--text-base);
   line-height: 1.6;
@@ -215,6 +188,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-brand);
   line-height: 1.2;
   font-weight: 600;
+  text-wrap: balance;
 }
 
 /* ── Form Controls Red ────────────────────────────────────── */
@@ -255,8 +229,23 @@ body::after {
   background-size: 128px 128px;
 }
 
-[data-theme="light"] body::after {
-  opacity: 0.025;
+/* ── Reveal Animations ────────────────────────────────────── */
+.reveal-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-up.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes badgePulse {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(200, 16, 46, 0.7); }
+  70% { transform: scale(1.05); box-shadow: 0 0 0 6px rgba(200, 16, 46, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(200, 16, 46, 0); }
 }
 
 /* ── Typography Utilities ──────────────────────────────────── */
@@ -269,18 +258,18 @@ body::after {
 
 /* ── Section Utilities ─────────────────────────────────────── */
 .section {
-  padding: var(--space-16) var(--content-pad);
+  padding: clamp(var(--space-12), 10vw, var(--space-24)) var(--content-pad);
   max-width: var(--max-width);
   margin: 0 auto;
 }
 
 .section-full {
-  padding: var(--space-16) var(--content-pad);
+  padding: clamp(var(--space-12), 10vw, var(--space-24)) var(--content-pad);
 }
 
 .section-header {
   text-align: center;
-  margin-bottom: var(--space-12);
+  margin-bottom: clamp(var(--space-8), 6vw, var(--space-12));
 }
 
 .section-label {
@@ -341,10 +330,10 @@ body::after {
 }
 .btn-primary:hover {
   background: var(--red-light);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(200, 16, 46, 0.35);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(200, 16, 46, 0.4);
 }
-.btn-primary:active { transform: translateY(0); }
+.btn-primary:active { transform: translateY(1px) scale(0.98); }
 
 .btn-outline {
   background: transparent;
@@ -430,11 +419,15 @@ body::after {
   opacity: 0.6;
 }
 
-/* ── Scrollbar ──────────────────────────────────────────────── */
-::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: var(--bg-surface); }
-::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--gold-dark); }
+/* ── Scrollbar — Hidden Globally ──────────────────────────── */
+* {
+  scrollbar-width: none;      /* Firefox */
+  -ms-overflow-style: none;   /* IE / Edge */
+}
+
+*::-webkit-scrollbar {
+  display: none;              /* Chrome / Safari / Opera */
+}
 
 /* ── Focus States ───────────────────────────────────────────── */
 :focus-visible {

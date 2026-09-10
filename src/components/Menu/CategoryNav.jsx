@@ -5,14 +5,7 @@ import styles from './CategoryNav.module.css';
 export function CategoryNav({ activeCategory, onSelect }) {
   const scrollRef = useRef(null);
 
-  // Scroll active category into view
-  useEffect(() => {
-    const container = scrollRef.current;
-    const active = container?.querySelector('[data-active="true"]');
-    if (active) {
-      active.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-    }
-  }, [activeCategory]);
+  // Container no longer scrolls horizontally, so we removed the scroll tracking effect.
 
   return (
     <nav className={styles.nav} aria-label="Menu categories">
@@ -24,7 +17,6 @@ export function CategoryNav({ activeCategory, onSelect }) {
           aria-selected={activeCategory === 'all'}
           data-active={activeCategory === 'all'}
         >
-          <span className={styles.tabIcon}>🍽️</span>
           <span>All</span>
         </button>
 
@@ -37,7 +29,6 @@ export function CategoryNav({ activeCategory, onSelect }) {
             aria-selected={activeCategory === cat.id}
             data-active={activeCategory === cat.id}
           >
-            <span className={styles.tabIcon}>{cat.icon}</span>
             <span>{cat.label}</span>
           </button>
         ))}

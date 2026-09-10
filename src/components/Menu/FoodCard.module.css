@@ -13,9 +13,13 @@
 }
 
 .card:hover {
-  transform: translateY(-3px);
+  transform: translateY(-4px);
   border-color: var(--border);
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+}
+
+.card:active {
+  transform: translateY(-1px) scale(0.98);
 }
 
 .card:hover .image {

@@ -1,36 +1,90 @@
 .section {
-  padding: var(--space-16) var(--content-pad);
+  padding: var(--space-8) var(--content-pad);
   background: var(--bg-elevated);
   position: relative;
+  overflow: hidden;
 }
 
 .header {
   text-align: center;
-  margin-bottom: var(--space-12);
+  margin-bottom: var(--space-6);
+}
+
+.carouselWrap {
+  position: relative;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+}
+
+.navBtn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-base);
+}
+
+.navBtn:hover {
+  background: var(--red);
+  color: #fff;
+  border-color: var(--red);
+  box-shadow: var(--shadow-md);
+}
+
+.navLeft { left: -16px; }
+.navRight { right: -16px; }
+
+@media (max-width: 768px) {
+  .navBtn { display: none; } /* On mobile, users can just swipe */
 }
 
 .grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: var(--space-6);
-  max-width: var(--max-width);
-  margin: 0 auto;
+  display: flex;
+  gap: var(--space-4);
+  width: 100%;
+  overflow-x: auto;
+  padding: var(--space-2) var(--space-2) var(--space-4);
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.grid::-webkit-scrollbar {
+  display: none;
 }
 
 .card {
   background: var(--bg-surface);
   border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  padding: var(--space-6);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: var(--space-3);
   transition: transform var(--transition-base), box-shadow var(--transition-base);
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+  flex: 0 0 100%;
+  scroll-snap-align: center;
 }
 
 .card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
 }
 
 .cardHeader {

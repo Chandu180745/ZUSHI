@@ -1,13 +1,24 @@
+@keyframes backdropFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
 .backdrop {
   position: fixed;
   inset: 0;
   background: rgba(0,0,0,0.75);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   z-index: var(--z-drawer);
   display: flex;
   align-items: flex-end;
   justify-content: center;
+  animation: backdropFade 0.3s ease forwards;
 }
 
 @media (min-width: 769px) {
@@ -27,6 +38,15 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  animation: slideInUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@media (max-width: 768px) {
+  .drawer {
+    margin-bottom: calc(var(--mobile-nav-h, 64px) + 16px);
+    max-height: calc(100svh - var(--mobile-nav-h, 64px) - 32px);
+  }
 }
 
 @media (min-width: 769px) {
@@ -202,6 +222,38 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.qtySelector {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  padding: 4px 12px;
+}
+
+.qtyBtn {
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 4px;
+  transition: transform var(--transition-fast);
+}
+
+.qtyBtn:active {
+  transform: scale(0.9);
+}
+
+.qtyVal {
+  font-weight: 600;
+  font-size: var(--text-sm);
+  min-width: 1ch;
+  text-align: center;
 }
 
 .itemTotal {

@@ -165,10 +165,10 @@ function CartItem({ item, onRemove, onUpdateQty }) {
           </button>
         </div>
         <div className={styles.itemBottom}>
-          <div className="qty-selector">
-            <button className="qty-btn" onClick={() => onUpdateQty(item.quantity - 1)} aria-label="Decrease">−</button>
-            <span className="qty-value" aria-live="polite">{item.quantity}</span>
-            <button className="qty-btn" onClick={() => onUpdateQty(item.quantity + 1)} aria-label="Increase">+</button>
+          <div className={styles.qtySelector}>
+            <button className={styles.qtyBtn} onClick={() => onUpdateQty(item.quantity - 1)} aria-label="Decrease">−</button>
+            <span className={styles.qtyVal} aria-live="polite">{item.quantity}</span>
+            <button className={styles.qtyBtn} onClick={() => onUpdateQty(item.quantity + 1)} aria-label="Increase">+</button>
           </div>
           <span className={styles.itemTotal}>₹{lineTotal}</span>
         </div>

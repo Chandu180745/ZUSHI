@@ -1,13 +1,12 @@
-import { useState, useMemo, useRef, useCallback } from 'react';
+import { useState, useMemo, useRef, useCallback, useEffect } from 'react';
 import { CATEGORIES, MENU_ITEMS } from '../../data/menu.js';
-import { CategoryNav } from './CategoryNav.jsx';
 import { FoodCard } from './FoodCard.jsx';
 import { FoodDetailModal } from './FoodDetailModal.jsx';
 import { useCart } from '../../context/CartContext.jsx';
+import { useScrollReveal } from '../../hooks/useScrollReveal.js';
 import styles from './MenuSection.module.css';
 
 const FILTERS = [
-  { id: 'all', label: 'All' },
   { id: 'veg', label: '🟢 Veg' },
   { id: 'non-veg', label: '🔴 Non-Veg' },
 ];
@@ -29,7 +28,22 @@ export function MenuSection() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const searchRef = useRef(null);
+  const revealRef = useScrollReveal();
   const { toast, show: showToast } = useToast();
+
+  // Listen for search events from the Header
+  useEffect(() => {
+    const handleSearchEvent = (e) => {
+      const query = e.detail;
+      if (query) {
+        setSearchQuery(query);
+        setSearchOpen(true);
+        setActiveCategory('all');
+      }
+    };
+    window.addEventListener('zushi-search', handleSearchEvent);
+    return () => window.removeEventListener('zushi-search', handleSearchEvent);
+  }, []);
 
   // Filter + search logic
   const filteredItems = useMemo(() => {
@@ -103,51 +117,10 @@ export function MenuSection() {
   return (
     <section id="menu" className={styles.section} aria-label="Menu">
       {/* Section Header */}
-      <div className={styles.header}>
-        <div className={styles.headerInner}>
-          <div>
-            <span className="section-label">Our Menu</span>
-            <h2 className={styles.title}>Explore Zushi</h2>
-          </div>
-
-          <div className={styles.headerActions}>
-            {/* Search */}
-            <div className={`${styles.searchWrap} ${searchOpen ? styles.searchOpen : ''}`}>
-              {searchOpen ? (
-                <div className={styles.searchInputWrap}>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className={styles.searchIcon}>
-                    <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-                  </svg>
-                  <input
-                    ref={searchRef}
-                    type="search"
-                    placeholder="Search Zushi's menu..."
-                    value={searchQuery}
-                    onChange={e => setSearchQuery(e.target.value)}
-                    className={styles.searchInput}
-                    aria-label="Search menu"
-                  />
-                  {searchQuery && (
-                    <button onClick={clearSearch} className={styles.searchClear} aria-label="Clear search">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-                        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-                      </svg>
-                    </button>
-                  )}
-                  <button onClick={() => { setSearchOpen(false); setSearchQuery(''); }} className={styles.searchCancel}>
-                    Cancel
-                  </button>
-                </div>
-              ) : (
-                <button className={`btn btn-ghost btn-sm ${styles.searchBtn}`} onClick={openSearch} aria-label="Search menu">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                    <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-                  </svg>
-                  Search
-                </button>
-              )}
-            </div>
-          </div>
+      <div className={`${styles.header} reveal-up`} ref={revealRef} style={{textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--space-6)'}}>
+        <div style={{textAlign: 'center'}}>
+          <span className="section-label" style={{justifyContent: 'center'}}>Our Menu</span>
+          <div className="gold-line" style={{margin: 'var(--space-3) auto 0'}} />
         </div>
 
         {/* Filters */}
@@ -156,7 +129,7 @@ export function MenuSection() {
             <button
               key={f.id}
               className={`${styles.filterBtn} ${activeFilter === f.id ? styles.filterActive : ''}`}
-              onClick={() => setActiveFilter(f.id)}
+              onClick={() => setActiveFilter(prev => prev === f.id ? 'all' : f.id)}
               aria-pressed={activeFilter === f.id}
             >
               {f.label}
@@ -165,8 +138,6 @@ export function MenuSection() {
         </div>
       </div>
 
-      {/* Category Nav (sticky) */}
-      <CategoryNav activeCategory={activeCategory} onSelect={setActiveCategory} />
 
       {/* Grid */}
       <div className={styles.content}>
@@ -188,7 +159,6 @@ export function MenuSection() {
               {category && (
                 <div className={styles.categoryHeader} id={`cat-${category.id}`}>
                   <h3 className={styles.categoryTitle}>
-                    <span className={styles.categoryIcon}>{category.icon}</span>
                     {category.label}
                   </h3>
                   <div className="gold-line-sm" />

@@ -1,6 +1,5 @@
-import React, { useState, useCallback } from 'react';
-import { HashRouter, Routes, Route } from 'react-router-dom';
-import { ThemeProvider } from './context/ThemeContext.jsx';
+import React, { useState, useCallback, useEffect } from 'react';
+import { HashRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { CartProvider, useCart } from './context/CartContext.jsx';
 
 import { Header } from './components/Header/Header.jsx';
@@ -83,6 +82,20 @@ class ErrorBoundary extends React.Component {
     }
     return this.props.children;
   }
+}
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    // Disable browser's automatic scroll restoration on refresh
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
 }
 
 function Storefront() {
@@ -188,17 +201,16 @@ function Storefront() {
 function App() {
   return (
     <ErrorBoundary>
-      <ThemeProvider>
-        <CartProvider>
-          <HashRouter>
-            <Routes>
-              <Route path="/" element={<Storefront />} />
-              <Route path="/admin" element={<Admin />} />
-              <Route path="*" element={<Storefront />} />
-            </Routes>
-          </HashRouter>
-        </CartProvider>
-      </ThemeProvider>
+      <CartProvider>
+        <HashRouter>
+          <ScrollToTop />
+          <Routes>
+            <Route path="/" element={<Storefront />} />
+            <Route path="/admin" element={<Admin />} />
+            <Route path="*" element={<Storefront />} />
+          </Routes>
+        </HashRouter>
+      </CartProvider>
     </ErrorBoundary>
   );
 }

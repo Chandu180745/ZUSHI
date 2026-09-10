@@ -1,42 +1,49 @@
+@keyframes backdropFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modalPopIn {
+  from { opacity: 0; transform: scale(0.95) translateY(10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
 .backdrop {
   position: fixed;
   inset: 0;
   background: rgba(0,0,0,0.8);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  z-index: var(--z-modal);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: var(--z-item-modal);
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
-  padding: 0;
+  padding: var(--space-4);
+  /* Ensure padding at bottom so modal doesn't overlap mobile nav bar */
+  padding-bottom: calc(var(--space-4) + 80px);
+  animation: backdropFade 0.3s ease forwards;
 }
 
 @media (min-width: 769px) {
   .backdrop {
-    align-items: center;
-    padding: var(--space-8);
+    padding-bottom: var(--space-4);
   }
 }
 
 .modal {
   background: var(--bg-surface);
-  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  border-radius: var(--radius-xl);
   width: 100%;
-  max-width: 560px;
-  max-height: 92svh;
+  max-width: 460px;
+  max-height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
   position: relative;
   overscroll-behavior: contain;
-}
-
-@media (min-width: 769px) {
-  .modal {
-    border-radius: var(--radius-xl);
-    max-height: 85vh;
-  }
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+  animation: modalPopIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
 /* Close */
@@ -59,7 +66,8 @@
   transition: background var(--transition-fast);
 }
 
-.closeBtn:hover { background: var(--bg-elevated); }
+.closeBtn:hover { background: var(--bg-elevated); transform: scale(1.05); }
+.closeBtn:active { transform: scale(0.9); }
 
 /* Image */
 .imageWrap {
@@ -154,7 +162,8 @@
   position: relative;
 }
 
-.variantBtn:hover { border-color: var(--red); }
+.variantBtn:hover { border-color: var(--red); transform: translateY(-1px); }
+.variantBtn:active { transform: scale(0.96); }
 
 .variantSelected {
   border-color: var(--red) !important;
@@ -200,7 +209,8 @@
   text-align: left;
 }
 
-.addOnBtn:hover { border-color: var(--border); }
+.addOnBtn:hover { border-color: var(--border); transform: translateY(-1px); }
+.addOnBtn:active { transform: scale(0.96); }
 
 .addOnSelected {
   border-color: var(--red) !important;
@@ -305,3 +315,4 @@
 .addedState {
   background: #4CAF50 !important;
 }
+

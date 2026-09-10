@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import RESTAURANT_CONFIG from '../../config/restaurant.js';
+import { Logo } from '../Logo/Logo.jsx';
 import { getAssetUrl } from '../../utils/assets.js';
 import styles from './Hero.module.css';
 
@@ -22,13 +23,15 @@ export function Hero({ onExploreMenu, onOrderNow, onReserve }) {
     <section id="home" className={styles.hero} ref={heroRef} aria-label="Welcome to Zushi">
       {/* Background image with parallax */}
       <div className={styles.bg} aria-hidden="true">
-        <img
-          src={getAssetUrl('/images/hero-food.jpg')}
-          alt=""
-          className={styles.bgImg}
-          fetchpriority="high"
-          decoding="async"
-        />
+        <div className={styles.panContainer}>
+          <img
+            src={getAssetUrl('/images/hero-food.jpg')}
+            alt=""
+            className={styles.bgImg}
+            fetchpriority="high"
+            decoding="async"
+          />
+        </div>
         <div className={styles.bgOverlay} />
       </div>
 
@@ -46,9 +49,9 @@ export function Hero({ onExploreMenu, onOrderNow, onReserve }) {
           <span className={styles.eyebrowLine} />
         </div>
 
-        <h1 className={styles.heading}>
-          <span className={styles.headingAccent}>Zushi</span>
-        </h1>
+        <div className={styles.heroLogoWrapper}>
+          <Logo className={styles.fireLogo} />
+        </div>
 
         <p className={styles.subheading}>
           {RESTAURANT_CONFIG.tagline}
@@ -57,39 +60,25 @@ export function Hero({ onExploreMenu, onOrderNow, onReserve }) {
         {/* CTAs */}
         <div className={styles.ctas}>
           <button
-            className={`btn btn-primary btn-lg ${styles.ctaPrimary}`}
-            onClick={onOrderNow}
-            id="hero-order-now"
-          >
-            Order Now
-          </button>
-          <button
-            className={`btn btn-outline btn-lg ${styles.ctaSecondary}`}
+            className={`${styles.ctaBtn} ${styles.ctaPrimary}`}
             onClick={onExploreMenu}
             id="hero-explore-menu"
           >
             Explore Menu
           </button>
-          <button
-            className={`btn btn-ghost ${styles.ctaTertiary}`}
-            onClick={onReserve}
+          <a
+            href={RESTAURANT_CONFIG.reservationUrl || '#contact'}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`${styles.ctaBtn} ${styles.ctaSecondary}`}
             id="hero-reserve"
           >
-            Reserve a Table →
-          </button>
+            Reserve a Table
+          </a>
         </div>
 
         {/* Quick stats */}
         <div className={styles.stats} aria-label="Restaurant highlights">
-          <div className={styles.stat}>
-            <span className={styles.statValue}>
-              {RESTAURANT_CONFIG.google.rating}
-              <span className={styles.star}>★</span>
-            </span>
-            <span className={styles.statLabel}>{RESTAURANT_CONFIG.google.reviewCount} Reviews</span>
-          </div>
-
-          <div className={styles.statDivider} aria-hidden="true" />
           <div className={styles.stat}>
             <span className={styles.statValue}>Open</span>
             <span className={styles.statLabel}>From 12 PM</span>

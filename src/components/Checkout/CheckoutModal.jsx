@@ -73,7 +73,7 @@ export function CheckoutModal({ onClose, onConfirm }) {
       discount,
       total,
       tableNumber: String(tNum),
-      whatsappNumber: RESTAURANT_CONFIG.contact.whatsapp
+      whatsappNumber: RESTAURANT_CONFIG.whatsappOrderNumber
     });
 
     if (success) {
@@ -85,7 +85,7 @@ export function CheckoutModal({ onClose, onConfirm }) {
 
   return (
     <div className={styles.backdrop} onClick={e => { if (e.target === e.currentTarget) onClose(); }}>
-      <div className={`${styles.modal} animate-slide-up`}>
+      <div className={styles.modal}>
         <button className={styles.closeBtn} onClick={onClose} aria-label="Close checkout">
           ✕
         </button>
@@ -168,7 +168,7 @@ export function CheckoutModal({ onClose, onConfirm }) {
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
               <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
             </svg>
-            Send to Kitchen (WhatsApp)
+            Send to Kitchen
           </button>
         </div>
       </div>

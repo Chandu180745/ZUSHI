@@ -1,59 +1,151 @@
-.nav {
+.navContainer {
   position: fixed;
-  bottom: 0;
+  bottom: calc(20px + env(safe-area-inset-bottom));
   left: 0;
   right: 0;
-  height: var(--mobile-nav-h);
-  background: var(--glass-bg);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  border-top: 1px solid var(--glass-border);
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
+  height: 72px;
   z-index: var(--z-nav);
-  padding: 0 var(--space-4);
-  padding-bottom: env(safe-area-inset-bottom);
+  display: flex;
+  justify-content: center;
+  pointer-events: none; /* Let clicks pass through container */
 }
 
 @media (min-width: 769px) {
-  .nav { display: none; }
+  .navContainer { display: none; }
+}
+
+/* Floating Center Button (The FAB) */
+.centerFab {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  /* Glowing outer ring effect from the picture */
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  z-index: 20;
+  pointer-events: auto;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.fabInner {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #f8f8f8;
+  color: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 -2px 6px rgba(0,0,0,0.1), 0 4px 12px rgba(0,0,0,0.5);
+}
+
+.fabInner svg {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.2s ease;
+}
+
+.centerFab:hover .fabInner svg {
+  transform: scale(1.1);
+}
+
+.centerFab:active {
+  transform: translateX(-50%) scale(0.95);
+}
+
+/* The dark dock */
+.navDock {
+  position: relative;
+  width: 310px; /* Compact width matching the picture */
+  height: 72px;
+  background: rgba(22, 22, 22, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8px;
+  pointer-events: auto;
+  /* Top inner glow and outer drop shadow */
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1), 0 10px 30px rgba(0,0,0,0.6);
+  
+  /* The Notch Cutout - Perfectly circular, perfectly aligned with FAB */
+  -webkit-mask-image: radial-gradient(circle 40px at 50% -8px, transparent 100%, black 100%);
+  mask-image: radial-gradient(circle 40px at 50% -8px, transparent 100%, black 100%);
 }
 
 .navItem {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3px;
-  padding: var(--space-2) var(--space-4);
-  border-radius: var(--radius-lg);
-  color: var(--text-muted);
+  justify-content: center;
+  gap: 6px;
+  color: #999999;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   font-size: 10px;
   font-weight: 500;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  cursor: pointer;
+  letter-spacing: 0.12em;
   background: none;
   border: none;
-  transition: color var(--transition-fast);
-  min-width: 60px;
-  min-height: 48px;
-  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  flex: 1;
+  height: 100%;
 }
 
-.navItem:hover { color: var(--text-secondary); }
+.icon {
+  width: 22px;
+  height: 22px;
+  transition: transform 0.2s ease, stroke-width 0.2s ease;
+}
 
-/* Cart item — prominent */
+.navItem:hover {
+  color: #ffffff;
+}
+
+.navItem:hover .icon {
+  transform: translateY(-2px);
+  stroke-width: 1.8;
+}
+
+.navItem:active .icon {
+  transform: translateY(1px) scale(0.95);
+}
+
+/* Spacer for the center cutout text */
+.centerSpacer {
+  flex: 0.8;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  height: 100%;
+  padding-bottom: 12px;
+}
+
+.centerSpacer span {
+  color: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+
 .cartNavItem {
-  color: var(--text-secondary);
   position: relative;
 }
 
-.cartNavItem.hasItems {
-  color: var(--red);
-}
-
-.cartIcon {
+.cartIconWrapper {
   position: relative;
   display: flex;
   align-items: center;
@@ -62,17 +154,19 @@
 
 .badge {
   position: absolute;
-  top: -6px;
-  right: -8px;
+  top: -4px;
+  right: -6px;
   width: 16px;
   height: 16px;
-  background: var(--red);
-  color: #0C0A09;
+  background: #ff4747;
+  color: #ffffff;
   border-radius: 50%;
   font-size: 9px;
   font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: scaleIn 0.2s var(--transition-spring);
+  font-family: sans-serif;
+  border: 2px solid rgba(22, 22, 22, 0.9);
+  animation: badgePulse 2s infinite;
 }
