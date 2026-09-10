@@ -946,7 +946,7 @@ export const MENU_ITEMS = [
     "description": "Stir-fried noodles with vegetables in aromatic Sichuan pepper sauce.",
     "category": "noodles",
     "type": "veg",
-    "image": "https://loremflickr.com/600/400/noodles?lock=39",
+    "image": "/images/schezuan_noodles.jpg",
     "basePrice": 299,
     "variants": [
       {
@@ -983,7 +983,7 @@ export const MENU_ITEMS = [
     "description": "Stir-fried noodles with indulgent melted butter, garlic & herbs.",
     "category": "noodles",
     "type": "veg",
-    "image": "https://loremflickr.com/600/400/noodles?lock=40",
+    "image": "/images/butter_garlic_noodles.jpg",
     "basePrice": 299,
     "variants": [
       {
@@ -1020,7 +1020,7 @@ export const MENU_ITEMS = [
     "description": "Wide rice noodles stir-fried with Thai basil & chilli in fiery savory sauce.",
     "category": "noodles",
     "type": "veg",
-    "image": "https://loremflickr.com/600/400/noodles?lock=41",
+    "image": "/images/thai_drunken_noodles.jpg",
     "chefSpecial": true,
     "basePrice": 329,
     "variants": [
@@ -1058,7 +1058,7 @@ export const MENU_ITEMS = [
     "description": "Korean stir-fried glass noodles with thinly sliced vegetables & savory sesame-soy glaze.",
     "category": "noodles",
     "type": "veg",
-    "image": "https://loremflickr.com/600/400/noodles?lock=42",
+    "image": "/images/japche.jpg",
     "basePrice": 329,
     "variants": [
       {
@@ -1095,7 +1095,7 @@ export const MENU_ITEMS = [
     "description": "Rice noodles tossed in fiery savory sauce with roasted peanuts.",
     "category": "noodles",
     "type": "veg",
-    "image": "https://loremflickr.com/600/400/noodles?lock=43",
+    "image": "/images/pad_thai.jpg",
     "basePrice": 329,
     "variants": [
       {
@@ -1133,7 +1133,7 @@ export const MENU_ITEMS = [
     "category": "entrees",
     "type": "non-veg",
     "basePrice": 449,
-    "image": "https://loremflickr.com/600/400/curry?lock=44",
+    "image": "/images/katsu_curry.jpg",
     "available": true,
     "sortOrder": 44
   },
@@ -1144,7 +1144,7 @@ export const MENU_ITEMS = [
     "category": "entrees",
     "type": "non-veg",
     "basePrice": 449,
-    "image": "https://loremflickr.com/600/400/curry?lock=45",
+    "image": "/images/pad_krapow.jpg",
     "available": true,
     "sortOrder": 45
   },
@@ -1154,7 +1154,7 @@ export const MENU_ITEMS = [
     "description": "Aromatic Thai curry with coconut milk, bamboo shoots & seasonal vegetables.",
     "category": "entrees",
     "type": "veg",
-    "image": "https://loremflickr.com/600/400/curry?lock=46",
+    "image": "/images/thai_curry.jpg",
     "chefSpecial": true,
     "basePrice": 399,
     "variants": [
@@ -1192,7 +1192,7 @@ export const MENU_ITEMS = [
     "description": "Thick, aromatic curry with creamy coconut base, savory peanut flavor & subtle heat.",
     "category": "entrees",
     "type": "veg",
-    "image": "https://loremflickr.com/600/400/curry?lock=47",
+    "image": "/images/panang_curry.jpg",
     "chefSpecial": true,
     "basePrice": 399,
     "variants": [
@@ -1230,7 +1230,7 @@ export const MENU_ITEMS = [
     "description": "Crispy fried rolls with minced protein, vegetables & glass noodles in sweet chilli sauce.",
     "category": "appetizers",
     "type": "non-veg",
-    "image": "https://loremflickr.com/600/400/sushi?lock=48",
+    "image": "/images/spring_roll.jpg",
     "basePrice": 349,
     "variants": [
       {
@@ -1256,7 +1256,7 @@ export const MENU_ITEMS = [
     "category": "appetizers",
     "type": "non-veg",
     "basePrice": 399,
-    "image": "https://loremflickr.com/600/400/appetizer?lock=49",
+    "image": "/images/yaki_tori.jpg",
     "available": true,
     "sortOrder": 49
   },
@@ -1267,7 +1267,7 @@ export const MENU_ITEMS = [
     "category": "appetizers",
     "type": "non-veg",
     "basePrice": 399,
-    "image": "https://loremflickr.com/600/400/appetizer?lock=50",
+    "image": "/images/korean_spicy_wings.jpg",
     "available": true,
     "sortOrder": 50
   },
@@ -1278,7 +1278,7 @@ export const MENU_ITEMS = [
     "category": "appetizers",
     "type": "non-veg",
     "basePrice": 399,
-    "image": "https://loremflickr.com/600/400/food?lock=51",
+    "image": "/images/teriyaki_chicken.jpg",
     "chefSpecial": true,
     "available": true,
     "sortOrder": 51
@@ -1290,7 +1290,7 @@ export const MENU_ITEMS = [
     "category": "appetizers",
     "type": "non-veg",
     "basePrice": 399,
-    "image": "https://loremflickr.com/600/400/appetizer?lock=52",
+    "image": "/images/thai_satay.jpg",
     "available": true,
     "sortOrder": 52
   },
@@ -1301,7 +1301,7 @@ export const MENU_ITEMS = [
     "category": "appetizers",
     "type": "non-veg",
     "basePrice": 399,
-    "image": "https://loremflickr.com/600/400/appetizer?lock=53",
+    "image": "/images/phuket_fish.jpg",
     "available": true,
     "sortOrder": 53
   },
@@ -1312,7 +1312,7 @@ export const MENU_ITEMS = [
     "category": "veg-appetizers",
     "type": "veg",
     "basePrice": 379,
-    "image": "https://loremflickr.com/600/400/appetizer?lock=54",
+    "image": "/images/lotus_stem_chestnut.jpg",
     "chefSpecial": true,
     "available": true,
     "sortOrder": 54
@@ -1324,7 +1324,7 @@ export const MENU_ITEMS = [
     "category": "veg-appetizers",
     "type": "veg",
     "basePrice": 379,
-    "image": "https://loremflickr.com/600/400/appetizer?lock=55",
+    "image": "/images/tempura_veg_set.jpg",
     "available": true,
     "sortOrder": 55
   },
@@ -1335,7 +1335,7 @@ export const MENU_ITEMS = [
     "category": "veg-appetizers",
     "type": "veg",
     "basePrice": 379,
-    "image": "https://loremflickr.com/600/400/appetizer?lock=56",
+    "image": "/images/tofu_chilly.jpg",
     "chefSpecial": true,
     "available": true,
     "sortOrder": 56
@@ -1347,7 +1347,7 @@ export const MENU_ITEMS = [
     "category": "veg-appetizers",
     "type": "veg",
     "basePrice": 379,
-    "image": "https://loremflickr.com/600/400/appetizer?lock=57",
+    "image": "/images/paneer_chilly_basil.jpg",
     "available": true,
     "sortOrder": 57
   },
@@ -1358,7 +1358,7 @@ export const MENU_ITEMS = [
     "category": "desserts",
     "type": "veg",
     "basePrice": 229,
-    "image": "https://loremflickr.com/600/400/dessert?lock=58",
+    "image": "/images/wasabi_ice_cream.jpg",
     "available": true,
     "sortOrder": 58
   },
@@ -1369,7 +1369,7 @@ export const MENU_ITEMS = [
     "category": "desserts",
     "type": "veg",
     "basePrice": 229,
-    "image": "https://loremflickr.com/600/400/dessert?lock=59",
+    "image": "/images/matcha_ice_cream.jpg",
     "available": true,
     "sortOrder": 59
   },
@@ -1380,7 +1380,7 @@ export const MENU_ITEMS = [
     "category": "desserts",
     "type": "veg",
     "basePrice": 289,
-    "image": "https://loremflickr.com/600/400/dessert?lock=60",
+    "image": "/images/mochi_ice_cream.jpg",
     "variants": [
       {
         "id": "strawberry",
@@ -1417,7 +1417,7 @@ export const MENU_ITEMS = [
     "category": "desserts",
     "type": "veg",
     "basePrice": 299,
-    "image": "https://loremflickr.com/600/400/friedrice?lock=61",
+    "image": "/images/mango_sticky_rice.jpg",
     "available": true,
     "sortOrder": 61
   },
@@ -1428,7 +1428,7 @@ export const MENU_ITEMS = [
     "category": "beverages",
     "type": "veg",
     "basePrice": 99,
-    "image": "https://loremflickr.com/600/400/beverage?lock=62",
+    "image": "/images/soft_drink.jpg",
     "available": true,
     "sortOrder": 62
   },
@@ -1439,7 +1439,7 @@ export const MENU_ITEMS = [
     "category": "beverages",
     "type": "veg",
     "basePrice": 149,
-    "image": "https://loremflickr.com/600/400/beverage?lock=63",
+    "image": "/images/lime_soda.jpg",
     "available": true,
     "sortOrder": 63
   },
@@ -1450,7 +1450,7 @@ export const MENU_ITEMS = [
     "category": "beverages",
     "type": "veg",
     "basePrice": 199,
-    "image": "https://loremflickr.com/600/400/beverage?lock=64",
+    "image": "/images/virgin_mojito.jpg",
     "available": true,
     "sortOrder": 64
   },
@@ -1461,7 +1461,7 @@ export const MENU_ITEMS = [
     "category": "beverages",
     "type": "veg",
     "basePrice": 249,
-    "image": "https://loremflickr.com/600/400/beverage?lock=65",
+    "image": "/images/fruit_soda_float.jpg",
     "variants": [
       {
         "id": "yuzu",
@@ -1510,7 +1510,7 @@ export const MENU_ITEMS = [
     "category": "beverages",
     "type": "veg",
     "basePrice": 299,
-    "image": "https://loremflickr.com/600/400/beverage?lock=66",
+    "image": "/images/matcha_soda_float.jpg",
     "available": true,
     "sortOrder": 66
   },
@@ -1521,7 +1521,7 @@ export const MENU_ITEMS = [
     "category": "beverages",
     "type": "veg",
     "basePrice": 299,
-    "image": "https://loremflickr.com/600/400/beverage?lock=67",
+    "image": "/images/thai_tea.jpg",
     "available": true,
     "sortOrder": 67
   },
@@ -1532,7 +1532,7 @@ export const MENU_ITEMS = [
     "category": "beverages",
     "type": "veg",
     "basePrice": 349,
-    "image": "https://loremflickr.com/600/400/beverage?lock=68",
+    "image": "/images/boba_tea.jpg",
     "available": true,
     "sortOrder": 68
   },
@@ -1543,7 +1543,7 @@ export const MENU_ITEMS = [
     "category": "beverages",
     "type": "veg",
     "basePrice": 349,
-    "image": "https://loremflickr.com/600/400/beverage?lock=69",
+    "image": "/images/thai_tea_boba_tea.jpg",
     "available": true,
     "sortOrder": 69
   },
@@ -1554,7 +1554,7 @@ export const MENU_ITEMS = [
     "category": "beverages",
     "type": "veg",
     "basePrice": 349,
-    "image": "https://loremflickr.com/600/400/beverage?lock=70",
+    "image": "/images/matcha_boba.jpg",
     "available": true,
     "sortOrder": 70
   },
@@ -1565,7 +1565,7 @@ export const MENU_ITEMS = [
     "category": "beverages",
     "type": "veg",
     "basePrice": 349,
-    "image": "https://loremflickr.com/600/400/beverage?lock=71",
+    "image": "/images/fruit_boba.jpg",
     "variants": [
       {
         "id": "yuzu",
